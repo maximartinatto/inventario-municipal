@@ -1,23 +1,24 @@
 const { DataTypes } = require('sequelize');
 
+
 module.exports = (sequelize) => {
-  sequelize.define('Reparacion',
+  const Reparaciones = sequelize.define('Reparaciones',
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
+      nombre: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
       numeroOrden: {
         type: DataTypes.STRING(50),
         allowNull: false,
         field: "numero_orden",
       },
-      dispositivoId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        field: "dispositivo_id",
-      },
+      
       fechaRecepcion: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -55,12 +56,11 @@ module.exports = (sequelize) => {
       }
     },
     {
-      sequelize,
-      modelName: "reparacion",
+      
       timestamps: false,
     }
   );
   
-  return sequelize.models.Reparacion;
+  return Reparaciones;
 }
 

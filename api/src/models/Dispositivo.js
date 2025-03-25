@@ -1,7 +1,5 @@
 const { DataTypes } = require("sequelize");
-const { UsuarioAsignado } = require("./UsuarioAsignado");
-const { Reparaciones } = require("./Reparaciones");
-const { Categoria } = require("./Categoria");
+
 const EstadoDispositivo = {
   OPERATIVO: "Operativo",
   EN_REPARACION: "En reparación",
@@ -15,13 +13,17 @@ const TipoDispositivo = {
 };
 
 module.exports = (sequelize) => {
-  sequelize.define(
+  const Dispositivo = sequelize.define(
     "Dispositivo",
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+      },
+      nombre: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
       },
       tipo: {
         type: DataTypes.ENUM(...Object.values(TipoDispositivo)),
@@ -35,13 +37,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(100),
         allowNull: false,
       },
-
       numeroSerie: {
         type: DataTypes.STRING(50),
         allowNull: false,
         field: "numero_serie",
       },
-      // campos especificos para computadoras y notebooks
       procesador: {
         type: DataTypes.STRING(100),
         allowNull: true,
@@ -54,8 +54,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(50),
         allowNull: true,
       },
-
-      // campos especificos para impresoras
       tipoImpresora: {
         type: DataTypes.STRING(50),
         allowNull: true,
@@ -74,41 +72,26 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
         field: "sector_id",
+        // No incluyas referencias aquí
       },
       usuarioId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: "usuario_id",
-        references: {
-          model: UsuarioAsignado,
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+        // No incluyas referencias aquí
       },
       categoriaId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: "categoria_id",
-        references: {
-          model: Categoria,
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+        // No incluyas referencias aquí
       },
       reparacionesId: {
         type: DataTypes.INTEGER,
         allowNull: true,
         field: "reparaciones_id",
-        references: {
-          model: Reparaciones,
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL ",
+        // No incluyas referencias aquí
       },
-
       fechaAdquisicion: {
         type: DataTypes.DATEONLY,
         allowNull: false,
@@ -126,13 +109,10 @@ module.exports = (sequelize) => {
       },
     },
     {
-      sequelize,
-      modelName: "Dispositivo",
-      tableName: "dispositivos",
       timestamps: false,
     }
-
-    
   );
-  return sequelize.models.Dispositivo;
+  
+  // Retorna el modelo para poder usarlo
+  return Dispositivo;
 };

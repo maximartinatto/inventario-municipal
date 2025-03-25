@@ -8,7 +8,7 @@ const RolUsuario = {
 };
 
 module.exports = (sequelize) => {
-  sequelize.define(
+  const Usuario = sequelize.define(
     "Usuario",
     {
       id: {
@@ -47,9 +47,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      sequelize,
-      modelName: "Usuario",
-      tableName: "usuarios",
+      
       timestamps: false,
       hooks: {
         beforeCreate: async (usuario) => {
@@ -58,5 +56,7 @@ module.exports = (sequelize) => {
       },
     }
   );
-  return sequelize.models.Usuario;
+
+  return Usuario;
+  
 };

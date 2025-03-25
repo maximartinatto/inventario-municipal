@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define('Sector',
+  const Sector = sequelize.define('Sector',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: "categoria",
+      modelName: "Sector",
       timestamps: false,
     }
   );
   
-  return sequelize.models.Sector;
+  return Sector;
 }
 
