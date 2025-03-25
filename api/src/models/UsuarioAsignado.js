@@ -1,9 +1,8 @@
-const { Model, DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  class UsuarioAsignado extends Model {}
-
-  UsuarioAsignado.init(
+  sequelize.define(
+    "UsuarioAsignado",
     {
       id: {
         type: DataTypes.UUID,
@@ -15,24 +14,24 @@ module.exports = (sequelize) => {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Users',
-          key: 'id',
+          model: "Users",
+          key: "id",
         },
       },
       dispositivoId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Devices',
-          key: 'id',
+          model: "Devices",
+          key: "id",
         },
       },
       sectorId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Sectors',
-          key: 'id',
+          model: "Sectors",
+          key: "id",
         },
       },
       assignedAt: {
@@ -43,12 +42,13 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'UserDeviceSector',
-      tableName: 'user_device_sectors',
+      modelName: "UserDeviceSector",
+      tableName: "user_device_sectors",
       timestamps: true,
       underscored: true,
     }
   );
 
-  return UserDeviceSector;
+  return sequelize.models.UsuarioAsignado;
+  
 };

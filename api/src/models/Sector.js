@@ -1,26 +1,29 @@
-const { Model, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
-class Sector extends Model {}
-
-Sector.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+module.exports = (sequelize) => {
+  sequelize.define('Sector',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      nombre: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
+      cantidadEmpleados: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      }
     },
-    nombre: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
-    cantidadEmpleados: {
-      type: DataTypes.INTEGER,
-      allowNull
+    {
+      sequelize,
+      modelName: "categoria",
+      timestamps: false,
     }
-  },
-  {
-    sequelize,
-    modelName: "categoria",
-    timestamps: false,
-  }
-);
+  );
+  
+  return sequelize.models.Sector;
+}
+

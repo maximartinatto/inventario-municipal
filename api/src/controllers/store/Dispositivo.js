@@ -70,7 +70,7 @@ exports.createDispositivo = async (req, res) => {
 }
 
 // get /dispositivo
-exports.getDispositivos = async (req, res) => {
+exports.getAllDispositivos = async (req, res) => {
     try {
         const dispositivos = await Dispositivo.findAll({
             include: [Sector, UsuarioAsignado, Categoria, Reparaciones]

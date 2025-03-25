@@ -1,7 +1,7 @@
 const DispositivoModel = require('./Dispositivo');
 const CategoriaModel = require('./Categoria');
 const UsuarioModel = require('./User');
-const ReparacionModel = require('./Reparacion');
+const ReparacionModel = require('./Reparaciones');
 const SectorModel = require('./Sector');
 const UsuarioAsignadoModel = require('./UsuarioAsignado');
 
