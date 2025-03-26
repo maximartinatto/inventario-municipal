@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const loginUser = (userData) => async (dispatch) => {
   try {
-    dispatch({ type: "USER_LOGIN_REQUEST" });
+    dispatch({ type: "USER_LOGIN" });
 
     const { data } = await axios.post("/api/user/login", userData);
 

@@ -179,6 +179,22 @@ exports.updateDispositivo = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
+// put /dispositivoStatus/:id
+exports.updateDispositivoStatus = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const dispositivo = await Dispositivo.findByPk(id);
+        if (!dispositivo) {
+            return res.status(404).json({ message: "Dispositivo not found" });
+        }
+        await dispositivo.update({ show: !dispositivo.show });
+        res.status(200).json(dispositivo);
+    } catch (error) {
+        console.error('Error al actualizar el estado del dispositivo', error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
 // delete /dispositivo/:id
 exports.deleteDispositivo = async (req, res) => {
     try {

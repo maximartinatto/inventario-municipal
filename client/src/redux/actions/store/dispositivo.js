@@ -1,28 +1,28 @@
 import axios from "axios";
 
-export const fetchDispositivos = () => async (dispatch) => {
+export const getDispositivos = () => async (dispatch) => {
   try {
-    dispatch({ type: "FETCH_DISPOSITIVOS_REQUEST" });
+    dispatch({ type: "GET_DISPOSITIVOS" });
     const { data } = await axios.get("/api/store/dispositivos");
-    dispatch({ type: "FETCH_DISPOSITIVOS_SUCCESS", payload: data });
+    dispatch({ type: "GET_DISPOSITIVOS_SUCCESS", payload: data });
   } catch (error) {
-    dispatch({ type: "FETCH_DISPOSITIVOS_FAIL", payload: error.message });
+    dispatch({ type: "GET_DISPOSITIVOS_FAIL", payload: error.message });
   }
 };
 
-export const fetchDispositivoById = (id) => async (dispatch) => {
+export const getDispositivoById = (id) => async (dispatch) => {
   try {
-    dispatch({ type: "FETCH_DISPOSITIVO_REQUEST" });
+    dispatch({ type: "GET_DISPOSITIVO" });
     const { data } = await axios.get(`/api/store/dispositivo/${id}`);
-    dispatch({ type: "FETCH_DISPOSITIVO_SUCCESS", payload: data });
+    dispatch({ type: "GET_DISPOSITIVO_SUCCESS", payload: data });
   } catch (error) {
-    dispatch({ type: "FETCH_DISPOSITIVO_FAIL", payload: error.message });
+    dispatch({ type: "GET_DISPOSITIVO_FAIL", payload: error.message });
   }
 };
 
 export const createDispositivo = (dispositivo) => async (dispatch) => {
   try {
-    dispatch({ type: "CREATE_DISPOSITIVO_REQUEST" });
+    dispatch({ type: "CREATE_DISPOSITIVO" });
     const { data } = await axios.post("/api/store/dispositivo", dispositivo);
     dispatch({ type: "CREATE_DISPOSITIVO_SUCCESS", payload: data });
   } catch (error) {
@@ -32,7 +32,7 @@ export const createDispositivo = (dispositivo) => async (dispatch) => {
 
 export const updateDispositivo = (id, dispositivo) => async (dispatch) => {
   try {
-    dispatch({ type: "UPDATE_DISPOSITIVO_REQUEST" });
+    dispatch({ type: "UPDATE_DISPOSITIVO" });
     const { data } = await axios.put(
       `/api/store/dispositivo/${id}`,
       dispositivo
@@ -43,9 +43,25 @@ export const updateDispositivo = (id, dispositivo) => async (dispatch) => {
   }
 };
 
+export const updateDispositivoEstado = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/api/store/dispositivo/${id}`);
+      const dispositivoUpdated = response.data;
+
+      dispatch({
+        type: "UPDATE_DISPOSITIVO_ESTADO",
+        payload: dispositivoUpdated
+      });
+    } catch (error) {
+      console.log("Algo ocurrió al actualizar el estado del dispositivo.", error)
+    }
+  }
+}
+
 export const deleteDispositivo = (id) => async (dispatch) => {
   try {
-    dispatch({ type: "DELETE_DISPOSITIVO_REQUEST" });
+    dispatch({ type: "DELETE_DISPOSITIVO" });
     await axios.delete(`/api/store/dispositivo/${id}`);
     dispatch({ type: "DELETE_DISPOSITIVO_SUCCESS", payload: id });
   } catch (error) {

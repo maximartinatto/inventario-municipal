@@ -1,28 +1,28 @@
 import axios from "axios";
 
-export const fetchCategorias = () => async (dispatch) => {
+export const getCategorias = () => async (dispatch) => {
   try {
-    dispatch({ type: "FETCH_CATEGORIAS_REQUEST" });
+    dispatch({ type: "GET_CATEGORIAS" });
     const { data } = await axios.get("/api/store/categorias");
-    dispatch({ type: "FETCH_CATEGORIAS_SUCCESS", payload: data });
+    dispatch({ type: "GET_CATEGORIAS_SUCCESS", payload: data });
   } catch (error) {
-    dispatch({ type: "FETCH_CATEGORIAS_FAIL", payload: error.message });
+    dispatch({ type: "GET_CATEGORIAS_FAIL", payload: error.message });
   }
 };
 
-export const fetchCategoriaById = (id) => async (dispatch) => {
+export const getCategoriaById = (id) => async (dispatch) => {
   try {
-    dispatch({ type: "FETCH_CATEGORIA_REQUEST" });
+    dispatch({ type: "GET_CATEGORIA" });
     const { data } = await axios.get(`/api/store/categoria/${id}`);
-    dispatch({ type: "FETCH_CATEGORIA_SUCCESS", payload: data });
+    dispatch({ type: "GET_CATEGORIA_SUCCESS", payload: data });
   } catch (error) {
-    dispatch({ type: "FETCH_CATEGORIA_FAIL", payload: error.message });
+    dispatch({ type: "GET_CATEGORIA_FAIL", payload: error.message });
   }
 };
 
 export const createCategoria = (categoria) => async (dispatch) => {
   try {
-    dispatch({ type: "CREATE_CATEGORIA_REQUEST" });
+    dispatch({ type: "CREATE_CATEGORIA" });
     const { data } = await axios.post("/api/store/categoria", categoria);
     dispatch({ type: "CREATE_CATEGORIA_SUCCESS", payload: data });
   } catch (error) {
@@ -32,7 +32,7 @@ export const createCategoria = (categoria) => async (dispatch) => {
 
 export const updateCategoria = (id, categoria) => async (dispatch) => {
   try {
-    dispatch({ type: "UPDATE_CATEGORIA_REQUEST" });
+    dispatch({ type: "UPDATE_CATEGORIA" });
     const { data } = await axios.put(`/api/store/categoria/${id}`, categoria);
     dispatch({ type: "UPDATE_CATEGORIA_SUCCESS", payload: data });
   } catch (error) {
@@ -42,7 +42,7 @@ export const updateCategoria = (id, categoria) => async (dispatch) => {
 
 export const deleteCategoria = (id) => async (dispatch) => {
   try {
-    dispatch({ type: "DELETE_CATEGORIA_REQUEST" });
+    dispatch({ type: "DELETE_CATEGORIA" });
     await axios.delete(`/api/store/categoria/${id}`);
     dispatch({ type: "DELETE_CATEGORIA_SUCCESS", payload: id });
   } catch (error) {

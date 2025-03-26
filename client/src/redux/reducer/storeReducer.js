@@ -11,18 +11,19 @@ const initialState = {
 export const storeReducer = (state = initialState, action) => {
   switch (action.type) {
     // === DISPOSITIVOS ===
-    case "FETCH_DISPOSITIVOS_REQUEST":
-    case "FETCH_DISPOSITIVO_REQUEST":
-    case "CREATE_DISPOSITIVO_REQUEST":
-    case "UPDATE_DISPOSITIVO_REQUEST":
-    case "DELETE_DISPOSITIVO_REQUEST":
-    case "FETCH_DISPOSITIVOS_BY_SECTOR_REQUEST":
-    case "FETCH_DISPOSITIVOS_BY_USUARIO_REQUEST":
+    case "GET_DISPOSITIVOS":
+    case "GET_DISPOSITIVO":
+    case "CREATE_DISPOSITIVO":
+    case "UPDATE_DISPOSITIVO":
+    case "UPDATE_DISPOSITIVO_ESTADO":
+    case "DELETE_DISPOSITIVO":
+    case "GET_DISPOSITIVOS_BY_SECTOR":
+    case "GET_DISPOSITIVOS_BY_USUARIO":
       return { ...state, loading: true, error: null };
 
-    case "FETCH_DISPOSITIVOS_SUCCESS":
+    case "GET_DISPOSITIVOS_SUCCESS":
       return { ...state, dispositivos: action.payload, loading: false };
-    case "FETCH_DISPOSITIVO_SUCCESS":
+    case "GET_DISPOSITIVO_SUCCESS":
       return {
         ...state,
         dispositivos: state.dispositivos.concat(action.payload),
@@ -42,6 +43,14 @@ export const storeReducer = (state = initialState, action) => {
         ),
         loading: false,
       };
+    case "UPDATE_DISPOSITIVO_ESTADO":
+      return {
+        ...state,
+        dispositivos: state.dispositivos.map((dis) =>
+          dis.id === action.payload.id ? action.payload : dis
+        ),
+        loading: false,
+      };
     case "DELETE_DISPOSITIVO_SUCCESS":
       return {
         ...state,
@@ -50,45 +59,46 @@ export const storeReducer = (state = initialState, action) => {
         ),
         loading: false,
       };
-    case "FETCH_DISPOSITIVOS_BY_SECTOR_SUCCESS":
+    case "GET_DISPOSITIVOS_BY_SECTOR_SUCCESS":
       return { ...state, dispositivos: action.payload, loading: false };
-    case "FETCH_DISPOSITIVOS_BY_USUARIO_SUCCESS":
+    case "GET_DISPOSITIVOS_BY_USUARIO_SUCCESS":
       return { ...state, dispositivos: action.payload, loading: false };
 
     // === ERRORES ===
-    case "FETCH_DISPOSITIVOS_FAIL":
-    case "FETCH_DISPOSITIVO_FAIL":
+    case "GET_DISPOSITIVOS_FAIL":
+    case "GET_DISPOSITIVO_FAIL":
     case "CREATE_DISPOSITIVO_FAIL":
     case "UPDATE_DISPOSITIVO_FAIL":
     case "DELETE_DISPOSITIVO_FAIL":
-    case "FETCH_DISPOSITIVOS_BY_SECTOR_FAIL":
-    case "FETCH_DISPOSITIVOS_BY_USUARIO_FAIL":
+    case "GET_DISPOSITIVOS_BY_SECTOR_FAIL":
+    case "GET_DISPOSITIVOS_BY_USUARIO_FAIL":
       return { ...state, loading: false, error: action.payload };
 
     // === CATEGORÍAS ===
-    case "FETCH_CATEGORIAS_REQUEST":
-    case "FETCH_CATEGORIA_REQUEST":
-    case "CREATE_CATEGORIA_REQUEST":
-    case "UPDATE_CATEGORIA_REQUEST":
-    case "DELETE_CATEGORIA_REQUEST":
-    case "FETCH_SECTORES_REQUEST":
-    case "FETCH_SECTOR_REQUEST":
-    case "CREATE_SECTOR_REQUEST":
-    case "UPDATE_SECTOR_REQUEST":
-    case "DELETE_SECTOR_REQUEST":
-    case "FETCH_REPARACIONES_REQUEST":
-    case "FETCH_REPARACION_REQUEST":
-    case "CREATE_REPARACION_REQUEST":
-    case "UPDATE_REPARACION_REQUEST":
-    case "DELETE_REPARACION_REQUEST":
-    case "FETCH_USUARIOS_ASIGNADOS_REQUEST":
-    case "CREATE_USUARIO_ASIGNADO_REQUEST":
-    case "DELETE_USUARIO_ASIGNADO_REQUEST":
+    case "GET_CATEGORIAS":
+    case "GET_CATEGORIA":
+    case "CREATE_CATEGORIA":
+    case "UPDATE_CATEGORIA":
+    case "DELETE_CATEGORIA":
+    case "GET_SECTORES":
+    case "GET_SECTOR":
+    case "CREATE_SECTOR":
+    case "UPDATE_SECTOR":
+    case "DELETE_SECTOR":
+    case "GET_REPARACIONES":
+    case "GET_REPARACION":
+    case "CREATE_REPARACION":
+    case "UPDATE_REPARACION":
+    case "DELETE_REPARACION":
+    case "GET_USUARIOS_ASIGNADOS":
+    case "GET_USUARIO_ASIGNADO":
+    case "CREATE_USUARIO_ASIGNADO":
+    case "DELETE_USUARIO_ASIGNADO":
       return { ...state, loading: true, error: null };
 
-    case "FETCH_CATEGORIAS_SUCCESS":
+    case "GET_CATEGORIAS_SUCCESS":
       return { ...state, categorias: action.payload, loading: false };
-    case "FETCH_CATEGORIA_SUCCESS":
+    case "GET_CATEGORIA_SUCCESS":
       return {
         ...state,
         categorias: state.categorias.concat(action.payload),
@@ -116,9 +126,9 @@ export const storeReducer = (state = initialState, action) => {
       };
 
     // === SECTORES ===
-    case "FETCH_SECTORES_SUCCESS":
+    case "GET_SECTORES_SUCCESS":
       return { ...state, sectores: action.payload, loading: false };
-    case "FETCH_SECTOR_SUCCESS":
+    case "GET_SECTOR_SUCCESS":
       return {
         ...state,
         sectores: state.sectores.concat(action.payload),
@@ -146,9 +156,9 @@ export const storeReducer = (state = initialState, action) => {
       };
 
     // === REPARACIONES ===
-    case "FETCH_REPARACIONES_SUCCESS":
+    case "GET_REPARACIONES_SUCCESS":
       return { ...state, reparaciones: action.payload, loading: false };
-    case "FETCH_REPARACION_SUCCESS":
+    case "GET_REPARACION_SUCCESS":
       return {
         ...state,
         reparaciones: state.reparaciones.concat(action.payload),
@@ -178,8 +188,14 @@ export const storeReducer = (state = initialState, action) => {
       };
 
     // === USUARIOS ASIGNADOS ===
-    case "FETCH_USUARIOS_ASIGNADOS_SUCCESS":
+    case "GET_USUARIOS_ASIGNADOS_SUCCESS":
       return { ...state, usuariosAsignados: action.payload, loading: false };
+    case "GET_USUARIO_ASIGNADO_SUCCESS":
+      return {
+        ...state,
+        usuariosAsignados: state.usuariosAsignados.concat(action.payload),
+        loading: false,
+      };
     case "CREATE_USUARIO_ASIGNADO_SUCCESS":
       return {
         ...state,
@@ -196,22 +212,22 @@ export const storeReducer = (state = initialState, action) => {
       };
 
     // === ERRORES ===
-    case "FETCH_CATEGORIAS_FAIL":
-    case "FETCH_CATEGORIA_FAIL":
+    case "GET_CATEGORIAS_FAIL":
+    case "GET_CATEGORIA_FAIL":
     case "CREATE_CATEGORIA_FAIL":
     case "UPDATE_CATEGORIA_FAIL":
     case "DELETE_CATEGORIA_FAIL":
-    case "FETCH_SECTORES_FAIL":
-    case "FETCH_SECTOR_FAIL":
+    case "GET_SECTORES_FAIL":
+    case "GET_SECTOR_FAIL":
     case "CREATE_SECTOR_FAIL":
     case "UPDATE_SECTOR_FAIL":
     case "DELETE_SECTOR_FAIL":
-    case "FETCH_REPARACIONES_FAIL":
-    case "FETCH_REPARACION_FAIL":
+    case "GET_REPARACIONES_FAIL":
+    case "GET_REPARACION_FAIL":
     case "CREATE_REPARACION_FAIL":
     case "UPDATE_REPARACION_FAIL":
     case "DELETE_REPARACION_FAIL":
-    case "FETCH_USUARIOS_ASIGNADOS_FAIL":
+    case "GET_USUARIOS_ASIGNADOS_FAIL":
     case "CREATE_USUARIO_ASIGNADO_FAIL":
     case "DELETE_USUARIO_ASIGNADO_FAIL":
       return { ...state, loading: false, error: action.payload };

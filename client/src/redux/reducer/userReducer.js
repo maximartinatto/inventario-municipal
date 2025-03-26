@@ -8,8 +8,8 @@ const initialState = {
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "USER_REGISTER_REQUEST":
-    case "USER_LOGIN_REQUEST":
+    case "USER_REGISTER":
+    case "USER_LOGIN":
       return { ...state, loading: true };
 
     case "USER_REGISTER_SUCCESS":

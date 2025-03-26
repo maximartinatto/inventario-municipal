@@ -1,5 +1,5 @@
 const express = require('express');
-const { createDispositivo, getAllDispositivos, getDispositivoById, updateDispositivo, deleteDispositivo, getDispositivosBySector, getDispositivosByUsuario } = require('../controllers/store/Dispositivo');
+const { createDispositivo, getAllDispositivos, getDispositivoById, updateDispositivo, updateDispositivoStatus, deleteDispositivo, getDispositivosBySector, getDispositivosByUsuario } = require('../controllers/store/Dispositivo');
 const { createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory } = require('../controllers/store/Categoria');
 const { createSector, getAllSectors, getSectorById, updateSector, deleteSector } = require('../controllers/store/Sector');
 const { createReparation, getAllReparations, getReparationById, updateReparation, deleteReparation } = require('../controllers/store/Reparaciones');
@@ -17,6 +17,7 @@ storeRouter.post('/dispositivo', createDispositivo);
 storeRouter.get('/dispositivos', getAllDispositivos);
 storeRouter.get('/dispositivo/:id', getDispositivoById);
 storeRouter.put('/dispositivo/:id', updateDispositivo);
+storeRouter.put('/dispositivoStatus/:id', updateDispositivoStatus);
 storeRouter.delete('/dispositivo/:id', deleteDispositivo);
 storeRouter.get('/dispositivos/sector/:id', getDispositivosBySector);
 storeRouter.get('/dispositivos/usuario/:id', getDispositivosByUsuario);
