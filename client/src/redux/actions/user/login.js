@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const loginUser = (userData) => async (dispatch) => {
+export const login = (userData) => async (dispatch) => {
   try {
     dispatch({ type: "USER_LOGIN" });
 

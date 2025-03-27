@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import OptionLogged from './OptionLogged';
 import OptionAnonimous from './OptionAnonimous';
-import { logout } from '../../redux/actions/authActions';
+import { logout } from '../../redux/actions/user/logout';
 
 
 const ExpandOptions = () => {

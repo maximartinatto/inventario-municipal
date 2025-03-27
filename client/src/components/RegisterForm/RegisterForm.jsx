@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
-import { createUser } from "../../redux/actions/user/createUser";
+import { registerUser } from "../../redux/actions/user/createUser";
 import CustomAlert from "../CustomAlert/CustomAlert";
 import validate from "./validate";
 
@@ -46,7 +46,7 @@ const RegisterForm = () => {
         } else {
             setErrors({});
             if (recaptchaRef.current.getValue()) {
-                dispatch(createUser(form));
+                dispatch(registerUser(form));
                 setShowAlert(false);
             } else {
                 setAlertMessage("Por favor, completa el captcha.");

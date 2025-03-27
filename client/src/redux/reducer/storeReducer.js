@@ -144,7 +144,7 @@ export const storeReducer = (state = initialState, action) => {
       };
     
     // CATEGORIA-DISPOSITIVOS
-    case GET_CATEGORIA_DISPOSITIVO:
+    case "GET_CATEGORIA_DISPOSITIVO":
       return {
           ...state,
           categorias: action.payload,

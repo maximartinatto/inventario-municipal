@@ -19,7 +19,7 @@ export const getCategoriaById = (id) => async (dispatch) => {
     dispatch({ type: "GET_CATEGORIA_FAIL", payload: error.message });
   }
 };
-export const getCategoriaDispositivo = () => {
+export const getCategoriasDispositivos = () => {
   return async (dispatch) => {
       try {
           const response = await axios.get(`/api/store/categoria/${id}`); // Endpoint correcto
