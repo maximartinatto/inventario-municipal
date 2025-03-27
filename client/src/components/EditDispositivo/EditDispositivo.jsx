@@ -7,7 +7,7 @@ const EditDispositivo = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams(); // Obteniendo el id del dispositivo de la URL
-    const { dispositivo, loading, error } = useSelector((state) => state.dispositivo);
+    const { dispositivo, loading, error } = useSelector((state) => state.store.dispositivo);
     const [formData, setFormData] = useState({
         nombre: '',
         tipo: '',

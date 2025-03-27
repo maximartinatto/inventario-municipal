@@ -5,7 +5,7 @@ import { getCategorias, getCategoriaById } from '../../redux/actions/store/categ
 const CategoriasList = () => {
     const dispatch = useDispatch();
     const { categorias, loading, error } = useSelector((state) => state.categorias);
-    const { categoria, loading: loadingCategoria, error: errorCategoria } = useSelector((state) => state.categoria);
+    const { categoria, loading: loadingCategoria, error: errorCategoria } = useSelector((state) => state.store.categoria);
     const [selectedId, setSelectedId] = useState(null);
 
     useEffect(() => {

@@ -5,7 +5,7 @@ import { getReparaciones, getReparacionById } from '../../redux/actions/store/re
 const ReparacionesList = () => {
     const dispatch = useDispatch();
     const { reparaciones, loading, error } = useSelector((state) => state.reparaciones);
-    const { reparacion, loading: loadingReparacion, error: errorReparacion } = useSelector((state) => state.reparacion);
+    const { reparacion, loading: loadingReparacion, error: errorReparacion } = useSelector((state) => state.store.reparacion);
     const [selectedId, setSelectedId] = useState(null);
 
     useEffect(() => {

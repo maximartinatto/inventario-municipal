@@ -5,7 +5,7 @@ import { getCategorias } from "../../redux/actions/store/categoria";
 
 const AdminCategorias = () => {
     const dispatch = useDispatch()
-    const categorias = useSelector((state) => state.categorias);
+    const categorias = useSelector((state) => state.store.categoria);
 
     useEffect(() => {
         dispatch(getCategorias())

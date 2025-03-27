@@ -7,7 +7,7 @@ const EditUsuarioAsignado = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams(); // Obteniendo el id del usuario asignado de la URL
-    const { usuarioAsignado, loading, error } = useSelector((state) => state.usuarioAsignado);
+    const { usuarioAsignado, loading, error } = useSelector((state) => state.store.usuarioAsignado);
     const [formData, setFormData] = useState({
         nombre: '',
         correo: '',

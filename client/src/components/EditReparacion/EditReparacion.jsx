@@ -7,7 +7,7 @@ const EditReparacion = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams(); // Obteniendo el id de la reparación de la URL
-    const { reparacion, loading, error } = useSelector((state) => state.reparacion);
+    const { reparacion, loading, error } = useSelector((state) => state.store.reparacion);
     const [formData, setFormData] = useState({
         descripcion: '',
         dispositivoId: '',

@@ -19,6 +19,22 @@ export const getCategoriaById = (id) => async (dispatch) => {
     dispatch({ type: "GET_CATEGORIA_FAIL", payload: error.message });
   }
 };
+export const getCategoriaDispositivo = () => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.get(`/api/store/categoria/${id}`); // Endpoint correcto
+          dispatch({
+              type: GET_CATEGORIA_DISPOSITIVO,
+              payload: response.data,
+          });
+      } catch (error) {
+          dispatch({
+              type: GET_CATEGORIA_DISPOSITIVO_ERROR,
+              payload: error.message,
+          });
+      }
+  };
+};
 
 export const createCategoria = (categoria) => async (dispatch) => {
   try {
@@ -28,6 +44,11 @@ export const createCategoria = (categoria) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: "CREATE_CATEGORIA_FAIL", payload: error.message });
   }
+};
+export const clearCategoriaDispositivo = () => {
+  return (dispatch) => {
+      dispatch({ type: "CLEAR_CATEGORIA_DISPOSITIVO" });
+  };
 };
 
 export const updateCategoria = (id, categoria) => async (dispatch) => {

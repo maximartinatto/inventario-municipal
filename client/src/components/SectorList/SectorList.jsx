@@ -5,7 +5,7 @@ import { getSectores, getSectorById } from '../../redux/actions/store/sector';
 const SectoresList = () => {
     const dispatch = useDispatch();
     const { sectores, loading, error } = useSelector((state) => state.sectores);
-    const { sector, loading: loadingSector, error: errorSector } = useSelector((state) => state.sector);
+    const { sector, loading: loadingSector, error: errorSector } = useSelector((state) => state.store.sector);
     const [selectedId, setSelectedId] = useState(null);
 
     useEffect(() => {

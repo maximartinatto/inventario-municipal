@@ -20,6 +20,19 @@ export const getDispositivoById = (id) => async (dispatch) => {
   }
 };
 
+export const getDispositivoDetail = (dispositivoId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/store/dispositivos/${dispositivoId}`);
+      const dispositivo = response.data
+
+      dispatch({ type: 'GET_DETAIL_DISPOSITIVO', payload: dispositivo });
+    } catch (error) {
+      console.log("Algo ocurrió mientras se obtenía el dispositivo.", error)
+    }
+  }
+}
+
 export const createDispositivo = (dispositivo) => async (dispatch) => {
   try {
     dispatch({ type: "CREATE_DISPOSITIVO" });
@@ -28,6 +41,11 @@ export const createDispositivo = (dispositivo) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: "CREATE_DISPOSITIVO_FAIL", payload: error.message });
   }
+};
+export const clearDispositivoDetail = () => {
+  return (dispatch) => {
+      dispatch({ type: "CLEAR_DISPOSITIVO_DETAIL" });
+  };
 };
 
 export const updateDispositivo = (id, dispositivo) => async (dispatch) => {

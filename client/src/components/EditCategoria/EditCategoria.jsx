@@ -7,7 +7,7 @@ const EditCategoria = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams(); // Obteniendo el id de la categoría de la URL
-    const { categoria, loading, error } = useSelector((state) => state.categoria);
+    const { categoria, loading, error } = useSelector((state) => state.store.categoria);
     const [nombre, setNombre] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 

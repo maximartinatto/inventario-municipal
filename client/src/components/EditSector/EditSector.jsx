@@ -7,7 +7,7 @@ const EditSector = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams(); // Obteniendo el id del sector de la URL
-    const { sector, loading, error } = useSelector((state) => state.sector);
+    const { sector, loading, error } = useSelector((state) => state.store.sector);
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [errorMessage, setErrorMessage] = useState('');

@@ -5,7 +5,7 @@ import { getDispositivos, getDispositivoById } from '../../redux/actions/store/d
 const DispositivosList = () => {
     const dispatch = useDispatch();
     const { dispositivos, loading, error } = useSelector((state) => state.dispositivos);
-    const { dispositivo, loading: loadingDispositivo, error: errorDispositivo } = useSelector((state) => state.dispositivo);
+    const { dispositivo, loading: loadingDispositivo, error: errorDispositivo } = useSelector((state) => state.store.dispositivo);
     const [selectedId, setSelectedId] = useState(null);
 
     useEffect(() => {

@@ -5,7 +5,7 @@ import { getDispositivos, updateDispositivoEstado } from '../../redux/actions/st
 const DispositivoManager = () => {
     const dispatch = useDispatch();
     const [localDispositivo, setLocalDispositivo] = useState([]);
-    const dispositivos = useSelector((state) => state.dispositivo.dispositivos);
+    const dispositivos = useSelector((state) => state.store.dispositivo);
     const [tipoDispositivo, setTipoDispositivo] = useState('computadora');
 
     useEffect(() => {
@@ -24,8 +24,8 @@ const DispositivoManager = () => {
         setLocalDispositivo(updatedDispositivos);
     };
 
-    const handleTipoChange = (e) => {
-        setTipoDispositivo(e.target.value);
+    const handleTipoChange = (event) => {
+        setTipoDispositivo(event.target.value);
     };
 
     return (

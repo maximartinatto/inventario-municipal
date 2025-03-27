@@ -5,7 +5,7 @@ import { getUsuariosAsignados, getUsuarioAsignadoById } from '../../redux/action
 const UsuariosAsignadosList = () => {
     const dispatch = useDispatch();
     const { usuariosAsignados, loading, error } = useSelector((state) => state.usuariosAsignados);
-    const { usuarioAsignado, loading: loadingUsuario, error: errorUsuario } = useSelector((state) => state.usuarioAsignado);
+    const { usuarioAsignado, loading: loadingUsuario, error: errorUsuario } = useSelector((state) => state.store.usuarioAsignado);
     const [selectedId, setSelectedId] = useState(null);
 
     useEffect(() => {

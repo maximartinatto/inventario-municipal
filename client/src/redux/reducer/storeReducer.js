@@ -1,6 +1,8 @@
 const initialState = {
   dispositivos: [],
+  dispositivoDetail: [],
   categorias: [],
+  categoriasDispositivos: [],
   sectores: [],
   reparaciones: [],
   usuariosAsignados: [],
@@ -13,7 +15,9 @@ export const storeReducer = (state = initialState, action) => {
     // === DISPOSITIVOS ===
     case "GET_DISPOSITIVOS":
     case "GET_DISPOSITIVO":
+    case "GET_DETAIL_DISPOSITIVO":
     case "CREATE_DISPOSITIVO":
+    case "CLEAR_DISPOSITIVO_DETAIL":
     case "UPDATE_DISPOSITIVO":
     case "UPDATE_DISPOSITIVO_ESTADO":
     case "DELETE_DISPOSITIVO":
@@ -29,11 +33,18 @@ export const storeReducer = (state = initialState, action) => {
         dispositivos: state.dispositivos.concat(action.payload),
         loading: false,
       };
+    case "GET_DETAIL_DISPOSITIVO":
+      return {...state, dispositivos: action.payload}
     case "CREATE_DISPOSITIVO_SUCCESS":
       return {
         ...state,
         dispositivos: [...state.dispositivos, action.payload],
         loading: false,
+      };
+    case "CLEAR_DISPOSITIVO_DETAIL":
+      return {
+        ...state,
+        dispositivoDetail: {}, // Limpia los detalles del dispositivo
       };
     case "UPDATE_DISPOSITIVO_SUCCESS":
       return {
@@ -77,7 +88,9 @@ export const storeReducer = (state = initialState, action) => {
     // === CATEGORÍAS ===
     case "GET_CATEGORIAS":
     case "GET_CATEGORIA":
+    case "GET_CATEGORIA_DISPOSITIVO":
     case "CREATE_CATEGORIA":
+    case "CLEAR_CATEGORIA_DISPOSITIVO":
     case "UPDATE_CATEGORIA":
     case "DELETE_CATEGORIA":
     case "GET_SECTORES":
@@ -110,6 +123,11 @@ export const storeReducer = (state = initialState, action) => {
         categorias: [...state.categorias, action.payload],
         loading: false,
       };
+    case "CLEAR_CATEGORIA_DISPOSITIVO":
+      return {
+        ...state,
+        categorias: [], // Limpia las categorías de dispositivos
+      };
     case "UPDATE_CATEGORIA_SUCCESS":
       return {
         ...state,
@@ -123,6 +141,14 @@ export const storeReducer = (state = initialState, action) => {
         ...state,
         categorias: state.categorias.filter((cat) => cat.id !== action.payload),
         loading: false,
+      };
+    
+    // CATEGORIA-DISPOSITIVOS
+    case GET_CATEGORIA_DISPOSITIVO:
+      return {
+          ...state,
+          categorias: action.payload,
+          error: null, // Limpiar error en caso de éxito
       };
 
     // === SECTORES ===
@@ -214,6 +240,7 @@ export const storeReducer = (state = initialState, action) => {
     // === ERRORES ===
     case "GET_CATEGORIAS_FAIL":
     case "GET_CATEGORIA_FAIL":
+    case "GET_CATEGORIA_DISPOSITIVO_ERROR":
     case "CREATE_CATEGORIA_FAIL":
     case "UPDATE_CATEGORIA_FAIL":
     case "DELETE_CATEGORIA_FAIL":
