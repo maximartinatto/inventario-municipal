@@ -24,7 +24,7 @@ export const getCategoriasDispositivos = () => {
       try {
           const response = await axios.get(`/api/store/categoria/${id}`); // Endpoint correcto
           dispatch({
-              type: GET_CATEGORIA_DISPOSITIVO,
+              type: "GET_CATEGORIA_DISPOSITIVO",
               payload: response.data,
           });
       } catch (error) {
